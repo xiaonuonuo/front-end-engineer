@@ -47,15 +47,11 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence'),   
   rev = require('gulp-rev'),    
   revCollector = require('gulp-rev-collector');
-```
 
-  ```html
 //定义css、js文件路径，是本地css,js文件的路径，可自行配置
 var cssUrl = 'css/*.css',   
   jsUrl = 'js/*.js';
-```
 
-```html
 //CSS生成文件hash编码并生成 rev-manifest.json文件名对照映射
   gulp.task('revCss', function(){   
   return gulp.src(cssUrl)        
@@ -63,9 +59,7 @@ var cssUrl = 'css/*.css',
  .pipe(rev.manifest())        
  .pipe(gulp.dest('rev/css'));
  });
-```
 
-```html
 //js生成文件hash编码并生成 rev-manifest.json文件名对照映射
   gulp.task('revJs', function(){    
   return gulp.src(jsUrl)        
@@ -74,15 +68,13 @@ var cssUrl = 'css/*.css',
  .pipe(gulp.dest('rev/js'));
  });
 
-```
  //Html更换css、js文件版本
    gulp.task('revHtml', function () {    
    return gulp.src(['rev/**/*.json', 'WEB-INF/views/*.html'])  /*WEB-INF/views是本地html文件的路径，可自行配置*/        
   .pipe(revCollector())        
   .pipe(gulp.dest('WEB-INF/views'));  /*Html更换css、js文件版本,WEB-INF/views也是和本地html文件的路径一致*/
  });
-```
-```
+
 //开发构建
   gulp.task('dev', function (done) {   
   condition = false;   
