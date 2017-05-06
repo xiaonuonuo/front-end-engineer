@@ -17,10 +17,10 @@
 3. 替换原html中的js,css文件名，生成一个带版本号的文件名
 
 原结构下html文件代码：
-````html
-<link rel="stylesheet" href="../css/style.css">
-<script src="../js/index.js"></script>
-        要达到的效果：在原结构下html文件代码
+
+`<link rel="stylesheet" href="../css/style.css">
+<script src="../js/index.js"></script>`
+要达到的效果：在原结构下html文件代码
 
 <link rel="stylesheet" href="../css/style.css?v=0d83247610">
 <script src="../js/index.js?v=61c1ef9f34"></script></br>
