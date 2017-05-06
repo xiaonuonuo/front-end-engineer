@@ -74,14 +74,15 @@ var cssUrl = 'css/*.css',
  .pipe(gulp.dest('rev/js'));
  });
 
-
+```
  //Html更换css、js文件版本
    gulp.task('revHtml', function () {    
    return gulp.src(['rev/**/*.json', 'WEB-INF/views/*.html'])  /*WEB-INF/views是本地html文件的路径，可自行配置*/        
   .pipe(revCollector())        
   .pipe(gulp.dest('WEB-INF/views'));  /*Html更换css、js文件版本,WEB-INF/views也是和本地html文件的路径一致*/
  });
-
+```
+```
 //开发构建
   gulp.task('dev', function (done) {   
   condition = false;   
@@ -96,22 +97,25 @@ var cssUrl = 'css/*.css',
 
   1.打开node_modules\gulp-rev\index.js
     第144行 ```manifest[originalFile] = revisionedFile;```
-    更新为: manifest[originalFile] = originalFile + '?v=' + file.revHash;
-  2.打开nodemodules\gulp-rev\nodemodules\rev-path\index.js
-    10行 return filename + '-' + hash + ext;
-    更新为: return filename + ext;
-  3.打开node_modules\gulp-rev-collector\index.js
-    31行if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !== path.basename(key) ) {
-    更新为: if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {</br>
+    更新为: ```manifest[originalFile] = originalFile + '?v=' + file.revHash;```
+  2.打开```nodemodules\gulp-rev\nodemodules\rev-path\index.js```
+    10行 ```return filename + '-' + hash + ext;```
+    更新为: ```return filename + ext;```
+  3.打开```node_modules\gulp-rev-collector\index.js```
+    31行```if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !== path.basename(key) ) {
+    更新为: if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {</br>```
 四.执行gulp命令，得到的结果如下
-
+```
  <link rel="stylesheet" href="../css/style.css?v=0d83247610">
  <script src="../js/index.js?v=61c1ef9f34"></script>
-五.更改gulp-rev和gulp-rev-collector的原理
+ ```
+五.更改```gulp-rev和gulp-rev-collector```的原理
 
- 当你完成第二步gulpfile.js的编写，然后执行gulp后，你会发现效果如下:
+ 当你完成第二步```gulpfile.js```的编写，然后执行```gulp```后，你会发现效果如下:
+ ```
  //rev目录下生成了manifest.json对应文件
    { "style.css": "style-0d83247610.css"}
     <link rel="stylesheet" href="../css/style-0d83247610.css">
     <script src="../js/index-61c1ef9f34.js"></script>
+    ```
  这明显没有达到我们想要的效果，所以要按照第三步的要求更改代码！
