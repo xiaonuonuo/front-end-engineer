@@ -17,33 +17,45 @@
 3. 替换原html中的js,css文件名，生成一个带版本号的文件名
 
 原结构下html文件代码：
+```html
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/index.js"></script>
+```
 
-`<link rel="stylesheet" href="../css/style.css">
-<script src="../js/index.js"></script>`
 要达到的效果：在原结构下html文件代码
-
+```html
 <link rel="stylesheet" href="../css/style.css?v=0d83247610">
-<script src="../js/index.js?v=61c1ef9f34"></script></br>
+<script src="../js/index.js?v=61c1ef9f34"></script>
+```
+
 二.
 
 1.作为项目的开发依赖（devDependencies）安装gulp和gulp插件：
 
+```html
 npm install --save-dev gulp
 npm install --save-dev gulp-rev
 npm install --save-dev gulp-rev-collector
 npm install --save-dev run-sequence
+```
+
 2.编写gulpfile.js
 
+  ```html
 //引入gulp和gulp插件
-  var gulp = require('gulp'),  
+var gulp = require('gulp'),  
   runSequence = require('run-sequence'),   
   rev = require('gulp-rev'),    
   revCollector = require('gulp-rev-collector');
+```
 
+  ```html
 //定义css、js文件路径，是本地css,js文件的路径，可自行配置
-  var cssUrl = 'css/*.css',   
+var cssUrl = 'css/*.css',   
   jsUrl = 'js/*.js';
+```
 
+```html
 //CSS生成文件hash编码并生成 rev-manifest.json文件名对照映射
   gulp.task('revCss', function(){   
   return gulp.src(cssUrl)        
@@ -51,7 +63,9 @@ npm install --save-dev run-sequence
  .pipe(rev.manifest())        
  .pipe(gulp.dest('rev/css'));
  });
+```
 
+```html
 //js生成文件hash编码并生成 rev-manifest.json文件名对照映射
   gulp.task('revJs', function(){    
   return gulp.src(jsUrl)        
@@ -59,6 +73,7 @@ npm install --save-dev run-sequence
  .pipe(rev.manifest())        
  .pipe(gulp.dest('rev/js'));
  });
+
 
  //Html更换css、js文件版本
    gulp.task('revHtml', function () {    
@@ -76,10 +91,11 @@ npm install --save-dev run-sequence
   ['revHtml'],        
   done);});
   gulp.task('default', ['dev']);
+```  
 三.更改gulp-rev和gulp-rev-collector(重要)
 
   1.打开node_modules\gulp-rev\index.js
-    第144行 manifest[originalFile] = revisionedFile;
+    第144行 ```manifest[originalFile] = revisionedFile;```
     更新为: manifest[originalFile] = originalFile + '?v=' + file.revHash;
   2.打开nodemodules\gulp-rev\nodemodules\rev-path\index.js
     10行 return filename + '-' + hash + ext;
