@@ -104,7 +104,8 @@ var cssUrl = 'css/*.css',
   3.打开node_modules\gulp-rev-collector\index.js
 
     31行if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !== path.basename(key) ) {
-    更新为: if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {</br>
+    
+    更新为: if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {
   
 四.执行gulp命令，得到的结果如下
 ```
