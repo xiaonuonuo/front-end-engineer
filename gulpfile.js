@@ -17,7 +17,7 @@ let gulp = require('gulp'),
 
 //设置各种输入输出文件夹的位置;主要为html、css、js、image四类为主
 
-var srcScript = './src/js/*.js',
+let srcScript = './src/js/*.js',
     // distScript = './dist/js',
     distCss = './dist/css',
     distMinCSS = './dist/css',
@@ -56,7 +56,7 @@ gulp.task('imgmin', function() {
             subsample: "default"//子采样:default, disable;
         }),
         pngmin = imageminOptipng({
-            optimizationLevel: 4
+            optimizationLevel: 4  //类型：Number  默认：3  取值范围：0-7（优化等级）
         });
 
     gulp.src(srcImage)
