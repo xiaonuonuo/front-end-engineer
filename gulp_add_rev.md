@@ -88,24 +88,24 @@ var cssUrl = 'css/*.css',
 三.更改gulp-rev和gulp-rev-collector(重要)
 
   1.打开node_modules\gulp-rev\index.js
-   ```
+
     第144行 manifest[originalFile] = revisionedFile;
     
     更新为: manifest[originalFile] = originalFile + '?v=' + file.revHash;
- ```
+
 
   2.打开nodemodules\gulp-rev\nodemodules\rev-path\index.js
-```  
+
     10行 return filename + '-' + hash + ext;
     
     更新为: return filename + ext;
-    ```
+ 
     
   3.打开node_modules\gulp-rev-collector\index.js
-  ```
+
     31行if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !== path.basename(key) ) {
     更新为: if ( !_.isString(json[key]) || path.basename(json[key]).split('?')[0] !== path.basename(key) ) {</br>
-    ```
+  
 四.执行gulp命令，得到的结果如下
 ```
  <link rel="stylesheet" href="../css/style.css?v=0d83247610">
