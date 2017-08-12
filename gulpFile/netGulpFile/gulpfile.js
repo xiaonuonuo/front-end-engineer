@@ -15,7 +15,7 @@ var gulp = require('gulp'), //gulp插件
 
     imageminJpegRecompress = require('imagemin-jpeg-recompress'),  //jpg图片压缩
 
-    imageminOptipng = require('imagemin-optipng'),  //png图片压缩
+    imageminOptipng = require('imagemin-optipng');  //png图片压缩
 
 
 //设置各种输入输出文件夹的位置;主要为html、css、js、image四类为主
